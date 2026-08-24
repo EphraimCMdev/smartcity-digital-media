@@ -150,9 +150,39 @@ export function BookAdModal() {
       role="dialog"
       aria-labelledby="modal-title"
     >
-      {/* Light Premium Modal Surface Box */}
+      <style>{`
+        .always-light-modal-card {
+          color-scheme: light !important;
+          background-color: #FFFFFF !important;
+          color: #111827 !important;
+        }
+        .always-light-modal-card input,
+        .always-light-modal-card select,
+        .always-light-modal-card textarea {
+          color-scheme: light !important;
+          background-color: #F9FAFB !important;
+          color: #111827 !important;
+          border-color: #D1D5DB !important;
+        }
+        .always-light-modal-card input::placeholder,
+        .always-light-modal-card textarea::placeholder {
+          color: #9CA3AF !important;
+        }
+        .always-light-modal-card label {
+          color: #374151 !important;
+        }
+        .always-light-modal-card h2,
+        .always-light-modal-card h3 {
+          color: #0B0C0E !important;
+        }
+        .always-light-modal-card p {
+          color: #4B5563 !important;
+        }
+      `}</style>
+
+      {/* Light Premium Modal Surface Box (FORCED ALWAYS LIGHT MODE) */}
       <div 
-        className="relative w-full max-w-4xl max-h-[92vh] sm:max-h-[88vh] bg-white border border-[#E5E7EB] text-[#111827] overflow-y-auto p-5 sm:p-8 lg:p-10 text-left shadow-2xl rounded-none"
+        className="relative w-full max-w-4xl max-h-[92vh] sm:max-h-[88vh] bg-white border border-[#E5E7EB] text-[#111827] overflow-y-auto p-5 sm:p-8 lg:p-10 text-left shadow-2xl rounded-none always-light-modal-card"
         style={{
           position: "relative",
           width: "100%",
@@ -161,6 +191,7 @@ export function BookAdModal() {
           backgroundColor: "#FFFFFF",
           border: "1px solid #E5E7EB",
           color: "#111827",
+          colorScheme: "light",
           padding: "1.5rem 1.25rem",
           overflowY: "auto",
           boxSizing: "border-box",
@@ -352,6 +383,7 @@ export function BookAdModal() {
                         backgroundColor: "#F9FAFB",
                         border: errors.businessName ? "1px solid #EF4444" : "1px solid #D1D5DB",
                         color: "#111827",
+                        colorScheme: "light",
                         padding: "0.75rem 0.875rem",
                         fontSize: "1rem", // 16px to prevent iOS Safari auto-zoom
                         minHeight: "44px",
@@ -387,6 +419,7 @@ export function BookAdModal() {
                         backgroundColor: "#F9FAFB",
                         border: errors.contactPerson ? "1px solid #EF4444" : "1px solid #D1D5DB",
                         color: "#111827",
+                        colorScheme: "light",
                         padding: "0.75rem 0.875rem",
                         fontSize: "1rem",
                         minHeight: "44px",
@@ -422,6 +455,7 @@ export function BookAdModal() {
                         backgroundColor: "#F9FAFB",
                         border: errors.phone ? "1px solid #EF4444" : "1px solid #D1D5DB",
                         color: "#111827",
+                        colorScheme: "light",
                         padding: "0.75rem 0.875rem",
                         fontSize: "1rem",
                         minHeight: "44px",
@@ -457,6 +491,7 @@ export function BookAdModal() {
                         backgroundColor: "#F9FAFB",
                         border: errors.email ? "1px solid #EF4444" : "1px solid #D1D5DB",
                         color: "#111827",
+                        colorScheme: "light",
                         padding: "0.75rem 0.875rem",
                         fontSize: "1rem",
                         minHeight: "44px",
@@ -497,6 +532,7 @@ export function BookAdModal() {
                         backgroundColor: "#F9FAFB",
                         border: "1px solid #D1D5DB",
                         color: "#111827",
+                        colorScheme: "light",
                         padding: "0.75rem 0.875rem",
                         fontSize: "1rem",
                         minHeight: "44px",
@@ -527,6 +563,7 @@ export function BookAdModal() {
                         backgroundColor: "#F9FAFB",
                         border: "1px solid #D1D5DB",
                         color: "#111827",
+                        colorScheme: "light",
                         padding: "0.75rem 0.875rem",
                         fontSize: "1rem",
                         minHeight: "44px",
@@ -601,6 +638,7 @@ export function BookAdModal() {
                     backgroundColor: "#F9FAFB",
                     border: "1px solid #D1D5DB",
                     color: "#111827",
+                    colorScheme: "light",
                     padding: "0.75rem 0.875rem",
                     fontSize: "1rem",
                     resize: "vertical",
