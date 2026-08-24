@@ -1,0 +1,67 @@
+@import "tailwindcss";
+
+:root {
+  --bg-primary: #0B0C0E;
+  --bg-secondary: #14161B;
+  --bg-elevated: #1C1F26;
+  --text-primary: #F4F1EA;
+  --text-muted: #9CA3AF;
+  --border-default: #242832;
+  --border-subtle: #1E222A;
+  --accent-orange: #F05A24;
+  --accent-orange-hover: #D94A17;
+  --brand-cream: #EFECE6;
+}
+
+*, ::before, ::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
+  background-color: #0B0C0E !important;
+  color: #F4F1EA !important;
+  font-family: var(--font-sans, system-ui, -apple-system, sans-serif);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: inherit;
+  text-decoration: none !important;
+}
+
+a:hover {
+  text-decoration: none !important;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+::selection {
+  background-color: #F05A24;
+  color: #FFFFFF;
+}
+
+/* Base Responsive Container Utility */
+.site-container {
+  width: 100%;
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+@media (max-width: 640px) {
+  .site-container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
