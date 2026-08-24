@@ -42,7 +42,7 @@ export function Hero() {
           fill
           priority
           sizes="100vw"
-          className="object-cover object-center md:object-right opacity-90"
+          className="object-cover object-[70%_center] md:object-right opacity-95"
           style={{ objectFit: "cover" }}
         />
       </div>
@@ -55,12 +55,12 @@ export function Hero() {
           inset: 0,
           zIndex: 10,
           pointerEvents: "none",
-          background: "linear-gradient(to right, #0B0C0E 0%, #0B0C0E 25%, rgba(11,12,14,0.78) 48%, rgba(11,12,14,0.18) 72%, transparent 100%)",
+          background: "linear-gradient(to right, #0B0C0E 0%, #0B0C0E 30%, rgba(11,12,14,0.75) 55%, rgba(11,12,14,0.15) 80%, transparent 100%)",
         }}
         aria-hidden="true"
       />
 
-      {/* LAYER 1B: MOBILE GRADIENT VIGNETTE (< 768px) */}
+      {/* LAYER 1B: MOBILE DARK GRADIENT OVERLAY (< 768px) */}
       <div 
         className="absolute inset-0 z-10 pointer-events-none md:hidden"
         style={{
@@ -68,7 +68,7 @@ export function Hero() {
           inset: 0,
           zIndex: 10,
           pointerEvents: "none",
-          background: "linear-gradient(to bottom, #0B0C0E 0%, #0B0C0E 50%, rgba(11,12,14,0.75) 75%, rgba(11,12,14,0.3) 100%)",
+          background: "linear-gradient(to bottom, rgba(11,12,14,0.85) 0%, rgba(11,12,14,0.6) 45%, rgba(11,12,14,0.85) 100%)",
         }}
         aria-hidden="true"
       />
@@ -81,8 +81,8 @@ export function Hero() {
           zIndex: 20,
           maxWidth: "1280px",
           margin: "0 auto",
-          paddingLeft: "1rem",
-          paddingRight: "1rem",
+          paddingLeft: "1.5rem",
+          paddingRight: "1.5rem",
           paddingTop: "2rem",
           paddingBottom: "2rem",
           width: "100%",
@@ -96,7 +96,7 @@ export function Hero() {
         <div className="max-w-2xl text-left my-auto">
           
           {/* Eyebrow Category */}
-          <div className="flex items-center gap-3 mb-2.5">
+          <div className="flex items-center gap-3 mb-3">
             <span 
               className="text-xs font-bold tracking-widest text-[#F05A24] uppercase font-mono"
               style={{ color: "#F05A24", fontWeight: 700, fontSize: "0.75rem", letterSpacing: "0.12em", textTransform: "uppercase" }}
@@ -107,16 +107,16 @@ export function Hero() {
 
           {/* Editorial Display Headline */}
           <h1 
-            className="text-2xl sm:text-4xl md:text-5xl lg:text-5xl font-extrabold tracking-tight text-white leading-[1.08] mb-4 uppercase font-sans"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-extrabold tracking-tight text-white leading-[1.06] mb-5 uppercase font-sans"
             style={{
               color: "#FFFFFF",
               fontWeight: 800,
-              fontSize: "clamp(1.75rem, 5.5vw, 3.25rem)",
-              lineHeight: 1.08,
+              fontSize: "clamp(1.875rem, 4.5vw, 3.25rem)",
+              lineHeight: 1.06,
               letterSpacing: "-0.02em",
               textTransform: "uppercase",
-              marginTop: "0.25rem",
-              marginBottom: "1rem",
+              marginTop: "0.5rem",
+              marginBottom: "1.25rem",
             }}
           >
             <span className="block" style={{ display: "block" }}>{headline.line1}</span>
@@ -126,14 +126,14 @@ export function Hero() {
 
           {/* Supporting Copy */}
           <p 
-            className="text-sm sm:text-lg text-[#D1D5DB] max-w-xl mb-6 sm:mb-8 leading-relaxed font-normal"
+            className="text-base sm:text-lg text-[#D1D5DB] max-w-xl mb-8 leading-relaxed font-normal"
             style={{
               color: "#D1D5DB",
               maxWidth: "500px",
-              fontSize: "0.9375rem",
+              fontSize: "1.0625rem",
               lineHeight: 1.6,
               fontWeight: 400,
-              marginBottom: "1.5rem",
+              marginBottom: "2rem",
             }}
           >
             {supportingCopy}
@@ -141,13 +141,13 @@ export function Hero() {
 
           {/* Primary & Secondary Call to Actions */}
           <div 
-            className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 mb-6 sm:mb-8"
-            style={{ display: "flex", gap: "0.875rem", flexWrap: "wrap", marginBottom: "1.5rem" }}
+            className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mb-8"
+            style={{ display: "flex", gap: "1rem", flexWrap: "wrap", marginBottom: "2rem" }}
           >
             <button
               type="button"
               onClick={handlePrimaryCtaClick}
-              className="w-full sm:w-auto inline-flex items-center justify-center bg-[#F05A24] hover:bg-[#D94A17] text-white font-bold text-xs sm:text-sm tracking-wider uppercase min-h-[44px] px-8 py-3.5 rounded-none transition-colors duration-200 shadow-md border-none cursor-pointer"
+              className="w-full sm:w-auto inline-flex items-center justify-center bg-[#F05A24] hover:bg-[#D94A17] text-white font-bold text-xs sm:text-sm tracking-wider uppercase min-h-[44px] px-8 py-4 rounded-none transition-colors duration-200 shadow-md border-none cursor-pointer"
               style={{
                 display: "inline-flex",
                 alignItems: "center",
@@ -159,7 +159,7 @@ export function Hero() {
                 letterSpacing: "0.08em",
                 textTransform: "uppercase",
                 minHeight: "44px",
-                padding: "0.75rem 2rem",
+                padding: "0.875rem 2rem",
                 border: "none",
                 cursor: "pointer",
                 borderRadius: "0px",
@@ -170,7 +170,7 @@ export function Hero() {
 
             <Link
               href={secondaryCta.href}
-              className="w-full sm:w-auto inline-flex items-center justify-center bg-transparent hover:bg-[#14161B] text-[#F4F1EA] hover:text-white font-medium text-xs sm:text-sm tracking-wider uppercase min-h-[44px] px-8 py-3.5 border border-[#242832] transition-colors duration-200 no-underline"
+              className="w-full sm:w-auto inline-flex items-center justify-center bg-transparent hover:bg-[#14161B] text-[#F4F1EA] hover:text-white font-medium text-xs sm:text-sm tracking-wider uppercase min-h-[44px] px-8 py-4 border border-[#242832] transition-colors duration-200 no-underline"
               style={{
                 display: "inline-flex",
                 alignItems: "center",
@@ -182,7 +182,7 @@ export function Hero() {
                 letterSpacing: "0.08em",
                 textTransform: "uppercase",
                 minHeight: "44px",
-                padding: "0.75rem 2rem",
+                padding: "0.875rem 2rem",
                 border: "1px solid #242832",
                 textDecoration: "none",
               }}
@@ -192,7 +192,7 @@ export function Hero() {
           </div>
 
           {/* Location Context Tag */}
-          <div>
+          <div className="pt-2">
             <span 
               className="text-xs font-semibold tracking-widest text-[#9CA3AF] uppercase font-mono"
               style={{ color: "#9CA3AF", fontSize: "0.75rem", letterSpacing: "0.1em", textTransform: "uppercase" }}
