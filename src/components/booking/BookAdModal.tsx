@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useBookModal } from "@/context/BookModalContext";
+import { saveDemoEnquiry } from "@/lib/demoStorage";
 
 interface FormData {
   businessName: string;
@@ -38,6 +39,7 @@ export function BookAdModal() {
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submittedRefCode, setSubmittedRefCode] = useState<string>("SC-2026-001");
 
   // Lock body scroll and set up ESC key listener when modal is open
   useEffect(() => {
@@ -104,12 +106,27 @@ export function BookAdModal() {
     setIsSubmitting(true);
 
     setTimeout(() => {
+      // Save enquiry to localStorage frontend state
+      const created = saveDemoEnquiry({
+        businessName: formData.businessName.trim(),
+        contactPerson: formData.contactPerson.trim(),
+        phone: formData.phone.trim(),
+        email: formData.email.trim(),
+        businessType: formData.businessType.trim() || "N/A",
+        campaignDuration: formData.campaignDuration,
+        startDate: formData.startDate || "Flexible",
+        message: formData.message.trim() || "No specific message provided",
+      });
+
+      setSubmittedRefCode(created.referenceCode);
       setIsSubmitting(false);
       setIsSubmitted(true);
-    }, 500);
+    }, 400);
   };
 
-  const handleReset = () => {
+  const handleDone = () => {
+    closeBookModal();
+    // Reset form for subsequent openings
     setFormData({
       businessName: "",
       contactPerson: "",
@@ -122,10 +139,6 @@ export function BookAdModal() {
     });
     setErrors({});
     setIsSubmitted(false);
-  };
-
-  const handleCloseAndReset = () => {
-    closeBookModal();
   };
 
   return (
@@ -198,7 +211,7 @@ export function BookAdModal() {
         }}
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Top-Right Accessible Close Button (Min 44x44px touch target) */}
+        {/* Top-Right Accessible Close Button */}
         <button
           type="button"
           onClick={closeBookModal}
@@ -227,6 +240,7 @@ export function BookAdModal() {
         {/* SUCCESS STATE */}
         {isSubmitted ? (
           <div className="py-6 sm:py-8 text-center flex flex-col items-center justify-center">
+            {/* Success Icon */}
             <div 
               className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#F05A24]/10 border border-[#F05A24] flex items-center justify-center mb-5"
               style={{
@@ -247,64 +261,75 @@ export function BookAdModal() {
 
             <h2 
               id="modal-title"
-              className="text-xl sm:text-3xl font-extrabold tracking-tight text-[#0B0C0E] uppercase mb-2 font-sans"
+              className="text-2xl sm:text-4xl font-extrabold tracking-tight text-[#0B0C0E] uppercase mb-2 font-sans"
               style={{ color: "#0B0C0E", fontWeight: 800, textTransform: "uppercase" }}
             >
-              ENQUIRY RECEIVED
+              THANK YOU!
             </h2>
 
             <p 
-              className="text-base sm:text-lg text-[#1F2937] max-w-lg mb-1 leading-relaxed font-semibold"
-              style={{ color: "#1F2937", fontSize: "1rem", maxWidth: "480px" }}
+              className="text-base sm:text-lg text-[#1F2937] max-w-lg mb-1 leading-relaxed font-bold"
+              style={{ color: "#1F2937", fontSize: "1.0625rem", maxWidth: "500px" }}
             >
-              Thanks for reaching out.
+              We&apos;ve received your enquiry.
             </p>
+            
             <p 
-              className="text-xs sm:text-base text-[#4B5563] max-w-lg mb-6 leading-relaxed font-normal"
-              style={{ color: "#4B5563", fontSize: "0.875rem", maxWidth: "480px", marginBottom: "1.5rem" }}
+              className="text-xs sm:text-sm text-[#4B5563] max-w-lg mb-6 leading-relaxed font-normal"
+              style={{ color: "#4B5563", fontSize: "0.875rem", maxWidth: "500px", marginBottom: "1.5rem" }}
             >
-              Our team will get in touch with you shortly.
+              Our team will get in touch with you shortly to discuss advertising options.
             </p>
 
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto">
-              <button
-                type="button"
-                onClick={handleCloseAndReset}
-                className="w-full sm:w-auto inline-flex items-center justify-center bg-[#F05A24] hover:bg-[#D94A17] text-white font-bold text-xs tracking-wider uppercase min-h-[44px] px-8 transition-colors duration-200"
-                style={{
-                  backgroundColor: "#F05A24",
-                  color: "#FFFFFF",
-                  fontWeight: 700,
-                  fontSize: "0.75rem",
-                  letterSpacing: "0.08em",
-                  minHeight: "44px",
-                  padding: "0.75rem 2rem",
-                  border: "none",
-                  cursor: "pointer",
-                }}
+            {/* Generated Reference Code Badge */}
+            <div 
+              className="bg-[#F9FAFB] border border-[#E5E7EB] px-6 py-4 mb-8 text-center max-w-xs w-full"
+              style={{
+                backgroundColor: "#F9FAFB",
+                border: "1px solid #E5E7EB",
+                padding: "1rem 1.5rem",
+                marginBottom: "2rem",
+                maxWidth: "280px",
+                width: "100%",
+              }}
+            >
+              <span 
+                className="block text-[11px] font-bold tracking-widest text-[#6B7280] uppercase font-mono mb-1"
+                style={{ color: "#6B7280", fontSize: "0.6875rem", letterSpacing: "0.1em", textTransform: "uppercase", display: "block" }}
               >
-                CLOSE
-              </button>
-
-              <button
-                type="button"
-                onClick={handleReset}
-                className="w-full sm:w-auto inline-flex items-center justify-center bg-white hover:bg-[#F3F4F6] text-[#0B0C0E] font-bold text-xs tracking-wider uppercase min-h-[44px] px-8 border border-[#D1D5DB] transition-colors duration-200"
-                style={{
-                  backgroundColor: "#FFFFFF",
-                  color: "#0B0C0E",
-                  fontWeight: 700,
-                  fontSize: "0.75rem",
-                  letterSpacing: "0.08em",
-                  minHeight: "44px",
-                  padding: "0.75rem 2rem",
-                  border: "1px solid #D1D5DB",
-                  cursor: "pointer",
-                }}
+                Enquiry Reference
+              </span>
+              <span 
+                className="block text-xl font-extrabold text-[#F05A24] font-mono tracking-wider"
+                style={{ color: "#F05A24", fontWeight: 800, fontSize: "1.25rem", fontFamily: "monospace", letterSpacing: "0.08em", display: "block" }}
               >
-                SUBMIT ANOTHER ENQUIRY
-              </button>
+                {submittedRefCode}
+              </span>
             </div>
+
+            {/* Action DONE Button */}
+            <button
+              type="button"
+              onClick={handleDone}
+              className="w-full sm:w-auto inline-flex items-center justify-center bg-[#F05A24] hover:bg-[#D94A17] text-white font-bold text-xs sm:text-sm tracking-wider uppercase min-h-[44px] px-10 py-3.5 transition-colors duration-200 shadow-md border-none cursor-pointer"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                backgroundColor: "#F05A24",
+                color: "#FFFFFF",
+                fontWeight: 700,
+                fontSize: "0.8125rem",
+                letterSpacing: "0.08em",
+                textTransform: "uppercase",
+                minHeight: "44px",
+                padding: "0.75rem 2.5rem",
+                border: "none",
+                cursor: "pointer",
+              }}
+            >
+              DONE
+            </button>
           </div>
         ) : (
           /* FORM CONTENT IN LIGHT THEME */
@@ -647,7 +672,7 @@ export function BookAdModal() {
                 />
               </div>
 
-              {/* REFINED LIGHT CTA CONTAINER WITH TWO SEPARATE BUTTONS */}
+              {/* ACTION CONTAINER WITH SINGLE "GET A CALLBACK" ACTION BUTTON */}
               <div 
                 className="bg-[#F9FAFB] border border-[#E5E7EB] p-5 sm:p-7 text-center flex flex-col items-center justify-center"
                 style={{
@@ -671,21 +696,19 @@ export function BookAdModal() {
                   Tell us what you need and we&apos;ll get back to you.
                 </p>
 
-                {/* TWO SEPARATE CTA BUTTONS SIDE-BY-SIDE ON DESKTOP */}
+                {/* SINGLE PRIMARY CTA BUTTON: GET A CALLBACK */}
                 <div 
-                  className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 w-full"
+                  className="flex items-center justify-center w-full"
                   style={{
                     display: "flex",
-                    gap: "0.75rem",
                     width: "100%",
                     justifyContent: "center",
                   }}
                 >
-                  {/* PRIMARY CTA: BOOK YOUR AD */}
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full sm:w-auto inline-flex items-center justify-center bg-[#F05A24] hover:bg-[#D94A17] text-white font-bold text-xs sm:text-sm tracking-wider uppercase min-h-[44px] px-7 transition-colors duration-200 shadow-md border-none cursor-pointer"
+                    className="w-full sm:w-auto inline-flex items-center justify-center bg-[#F05A24] hover:bg-[#D94A17] text-white font-bold text-xs sm:text-sm tracking-wider uppercase min-h-[44px] px-9 transition-colors duration-200 shadow-md border-none cursor-pointer"
                     style={{
                       display: "inline-flex",
                       alignItems: "center",
@@ -693,37 +716,12 @@ export function BookAdModal() {
                       backgroundColor: "#F05A24",
                       color: "#FFFFFF",
                       fontWeight: 700,
-                      fontSize: "0.75rem",
+                      fontSize: "0.8125rem",
                       letterSpacing: "0.08em",
                       textTransform: "uppercase",
                       minHeight: "44px",
-                      padding: "0.75rem 1.75rem",
+                      padding: "0.75rem 2.25rem",
                       border: "none",
-                      cursor: "pointer",
-                      borderRadius: "0px",
-                    }}
-                  >
-                    {isSubmitting ? "Submitting..." : "BOOK YOUR AD"}
-                  </button>
-
-                  {/* SECONDARY CTA: GET A CALLBACK */}
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full sm:w-auto inline-flex items-center justify-center bg-white hover:bg-[#FFF5F0] text-[#0B0C0E] hover:text-[#F05A24] font-bold text-xs sm:text-sm tracking-wider uppercase min-h-[44px] px-7 border-2 border-[#F05A24] transition-colors duration-200 cursor-pointer"
-                    style={{
-                      display: "inline-flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      backgroundColor: "#FFFFFF",
-                      color: "#0B0C0E",
-                      fontWeight: 700,
-                      fontSize: "0.75rem",
-                      letterSpacing: "0.08em",
-                      textTransform: "uppercase",
-                      minHeight: "44px",
-                      padding: "0.75rem 1.75rem",
-                      border: "2px solid #F05A24",
                       cursor: "pointer",
                       borderRadius: "0px",
                     }}
